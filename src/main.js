@@ -1,10 +1,7 @@
 import express from 'express';
-import taskRouter from './routers/task-router.js';
-import userRouter from './routers/user-router.js';
 import { exceptionFilter } from './filters/exception-filter.js';
 import { roteNotFound } from './middleware/rote-not-found.js';
-import { prisma } from '../prisma/prisma.js';
-import authRouter from './auth/router/auth-router.js';
+import appRouter from './main-router.js';
 
 const app = express();
 app.use(express.json());
@@ -14,9 +11,8 @@ app.use(
   })
 );
 
-app.use('/tasks', taskRouter);
-app.use('/user', userRouter);
-app.use('/login', authRouter);
+app.use('/api', appRouter);
+
 // app.post('/user', (req, res, next) => {
 //   try {
 //     const user = req.body;
@@ -38,4 +34,4 @@ app.use('/login', authRouter);
 app.use(roteNotFound, exceptionFilter);
 
 const port = process.env.PORT;
-app.listen(port);
+app.listen(port, () => console.log('Server is runing'));

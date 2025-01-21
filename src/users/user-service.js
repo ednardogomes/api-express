@@ -1,5 +1,5 @@
 import { BadRequestException } from '../expections/bad-request-exception.js';
-import userRespository from '../repository/user-respository.js';
+import userRespository from './user-respository.js';
 
 class UserService {
   async create(data) {

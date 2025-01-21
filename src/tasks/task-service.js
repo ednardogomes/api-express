@@ -1,6 +1,6 @@
 import { BadRequestException } from '../expections/bad-request-exception.js';
 import { NotFoundException } from '../expections/not-found-exception.js';
-import taskRepository from '../repository/task-repository.js';
+import taskRepository from './task-repository.js';
 
 class TaskService {
   async create({ title, description }) {
@@ -36,10 +36,11 @@ class TaskService {
     if (isNaN(_id)) throw new BadRequestException('Invalid id');
 
     const task = await this.findOne(_id);
-    return await taskRepository.update(_id, {
+    await taskRepository.update(_id, {
       title: title || task.title,
       description: description || task.description
     });
+    console.log(title, description);
   }
 
   async delete(id) {

@@ -1,4 +1,4 @@
-import taskService from '../services/task-service.js';
+import taskService from './task-service.js';
 
 class TaskController {
   async create(req, res, next) {
@@ -8,6 +8,7 @@ class TaskController {
       res.json(task);
     } catch (error) {
       next(error);
+      console.log(error);
     }
   }
 

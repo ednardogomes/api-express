@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import userRespository from '../../repository/user-respository.js';
+import userRespository from '../../users/user-respository.js';
 import { unauthorizedException } from '../../expections/unauthorized-exception.js';
 import { NotFoundException } from '../../expections/not-found-exception.js';
 
@@ -16,8 +16,6 @@ class AuthService {
     }
 
     const passwordDB = userDB.password;
-
-    console.log(password);
 
     if (password !== passwordDB) {
       throw new unauthorizedException('Não Autorizado');
