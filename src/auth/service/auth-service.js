@@ -10,18 +10,18 @@ class AuthService {
     const { email, password } = data;
 
     const userDB = await userRespository.findOne(email.email);
-    console.log(userDB);
+
     if (!userDB) {
-      throw new NotFoundException('Usuário não encontrado');
+      throw new NotFoundException('Usuário ou senha incorretos');
     }
 
     const passwordDB = userDB.password;
 
     if (password !== passwordDB) {
-      throw new unauthorizedException('Não Autorizado');
+      throw new unauthorizedException('Usuário ou senha incorretos');
     }
 
-    const token = jwt.sign({ email, secret }, expiresIn);
+    const token = jwt.sign({ email }, secret, { expiresIn });
     return token;
   }
 }
